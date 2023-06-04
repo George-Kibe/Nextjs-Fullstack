@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='text-{14px] flex items-center justify-between mb-1'>
+    <div className='flex flex-col md:flex-row gap-2 text-{14px] items-center justify-between mb-1'>
       <div>©2023 Buenas Group. All Rights Reserved</div>
       <div className='flex gap-2'>
         <div className='h-5 w-5 relative'><Image fill className='cursor-pointer opacity-90' src={"/1.png"} alt='Buenas Facebook' /></div>
