@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import styles from "./page.module.css"
 import Image from "next/image";
 import HeroImage from "public/hero.png"
 
@@ -15,7 +16,7 @@ export default function Home() {
       <Button url={"./portfolio"} text={"See Our Works"}/>
     </div>
     <div className="flex-1">
-      <Image src={HeroImage} alt="HeroImage" className="w-full h-full object-cover" />
+      <Image src={HeroImage} alt="HeroImage" className={`w-full h-full ${styles.image}`} />
     </div>
    </div>
   )
