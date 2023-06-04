@@ -1,6 +1,3 @@
-.container{
-    background-color: red;
-}
 .image {
     object-fit: contain;
     animation: move 3s infinite ease alternate;
