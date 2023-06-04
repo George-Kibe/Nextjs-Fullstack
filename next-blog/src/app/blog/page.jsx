@@ -17,7 +17,7 @@ const Blog = () => {
           <p className="mb-2 md:mb-4">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste vitae saepe sequi? Ex voluptates tenetur adipisci. Provident quam, alias aperiam reprehenderit culpa eos ut? Repudiandae est ab sequi rem asperiores?
           </p>
-          <Button text="Read More" url={"#"}/>
+          <Button text="Read More" url={"/blog/testid"}/>
         </div>
       </div>
       <div className="flex flex-col md:flex-row items-center mb-4">
@@ -29,7 +29,7 @@ const Blog = () => {
           <p className="mb-2 md:mb-4">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste vitae saepe sequi? Ex voluptates tenetur adipisci. Provident quam, alias aperiam reprehenderit culpa eos ut? Repudiandae est ab sequi rem asperiores?
           </p>
-          <Button text="Read More" url={"#"}/>
+          <Button text="Read More" url={"/blog/testId"}/>
         </div>
       </div>
     </div>
