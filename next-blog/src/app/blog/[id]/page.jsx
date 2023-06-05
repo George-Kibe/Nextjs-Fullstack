@@ -3,6 +3,9 @@ import Image from 'next/image'
 import React from 'react'
 import {notFound} from "next/navigation";
 
+// Todo
+// Create API to make blogs and specific blog pages dynamic
+
 async function getBlogData(id) {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
     // next: { revalidate:10}, revalidate after every 10 seconds
@@ -16,8 +19,8 @@ async function getBlogData(id) {
 }
 const BlogPage = async({params}) => {
   console.log(params)
-  const blog = await getBlogData(params.id)
-  console.log(blog)
+  // const blog = await getBlogData(params.id)
+  // console.log(blog)
   return (
     <div>
       <div className="flex flex-col md:flex-row-reverse items-center mb-4">
