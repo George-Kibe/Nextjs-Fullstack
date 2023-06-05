@@ -1,8 +1,23 @@
 import Button from '@/components/Button'
 import Image from 'next/image'
 import React from 'react'
+import {notFound} from "next/navigation";
 
-const BlogPage = () => {
+async function getBlogData(id) {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    // next: { revalidate:10}, revalidate after every 10 seconds
+    cache: "no-store"
+  })
+  if(!res.ok) {
+    // throw new Error("Failed to fetch Data!")
+    return notFound()
+  }
+  return res.json();
+}
+const BlogPage = async({params}) => {
+  console.log(params)
+  const blog = await getBlogData(params.id)
+  console.log(blog)
   return (
     <div>
       <div className="flex flex-col md:flex-row-reverse items-center mb-4">
