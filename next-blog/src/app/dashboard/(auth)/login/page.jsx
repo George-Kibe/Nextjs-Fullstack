@@ -1,10 +1,13 @@
 "use client";
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const Login = () => {
   const [error, setError] = useState(false)
+  const router = useRouter();
+  const session = useSession
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -12,6 +15,13 @@ const Login = () => {
     const password = e.target[1].value;
     signIn("credentials", {email, password})
   }
+  if (session.status === "loading") {
+    return <p>loading...</p>
+  }
+  if (session.status === "authenticated") {
+    router?.push("/dashboard");
+  }
+  
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
     <form action="" className="flex flex-col gap-4" onSubmit={handleSubmit}>
