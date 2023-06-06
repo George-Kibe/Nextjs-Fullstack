@@ -7,15 +7,18 @@ import {notFound} from "next/navigation";
 // Create API to make blogs and specific blog pages dynamic
 
 async function getBlogData(id) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
     // next: { revalidate:10}, revalidate after every 10 seconds
     cache: "no-store"
   })
   if(!res.ok) {
+    return
     // throw new Error("Failed to fetch Data!")
-    return notFound()
   }
-  return res.json();
+  const response = await res.json()
+  console.log("Response", response)
+  
+  return response;
 }
 
 export async function generateMetadata({params}) {
@@ -30,7 +33,8 @@ export async function generateMetadata({params}) {
 const BlogPage = async({params}) => {
   console.log(params)
   // const blog = await getBlogData(params.id)
-  // console.log(blog)
+  const blog = await getBlogData("647d94e24b017c9595f53e9a")
+  console.log("Blog from single Blog Page: ", blog)
   return (
     <div>
       <div className="flex flex-col md:flex-row-reverse items-center mb-4">
