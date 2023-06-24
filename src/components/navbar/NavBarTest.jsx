@@ -1,29 +1,48 @@
 "use client"
 import React, { useState } from 'react';
+import DarkModeToggle from '../DarkModeToggle/DarkModeToggle'
+import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+const links = [
+  { id: 1, title: "Home", url: "/"},
+  { id: 2, title: "About", url: "/about"},
+  { id: 3, title: "Blog", url: "/blog"},
+  { id: 4, title: "Dashboard", url: "/dashboard"},
+  { id: 5, title: "Contact", url: "/contact"},
+  { id: 6, title: "Portfolio", url: "/portfolio"},
+]
 
 const NavbarTest = () => {
+  const session = useSession()
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-
+  const handleNavigation = (link) => {
+    setIsOpen(!isOpen);
+    router.push(link);
+  }
+  console.log(isOpen)
   return (
-    <nav className="bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <span className="text-white font-bold text-lg">Logo</span>
+    <nav className="bg-transparent">
+      <div className="w-full mx-auto p-2">
+        <div className="flex w-full items-center justify-between h-16">
+          <div className="flex w-full items-center justify-between">
+            <div className="">
+              <Link href="/"  className="font-bold text-[22px]">
+                <span className="font-bold text-2xl lg:text-4xl">Buenas Consultants</span>
+              </Link>              
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Contact
-                </a>
+              <div className="ml-2 flex space-x-4">
+                <DarkModeToggle />
+                {links.map((link, index) => (
+                  <Link key={link.id} href={link.url}  className="">{link.title}</Link>
+                ))}                
               </div>
             </div>
           </div>
@@ -56,13 +75,11 @@ const NavbarTest = () => {
       </div>
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 sm:px-3">
-            <a
-              href="#"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Home
-            </a>
+          <div className="px-2 pt-2 pb-3 sm:px-3 flex font-bold text-xl flex-col gap-2">
+            {links.map((link) => (
+              <button key={link.id} onClick={() => handleNavigation(link.url)} className="self-start">{link.title}</button>))
+            }
+            <DarkModeToggle />
           </div>
         </div>
       )}

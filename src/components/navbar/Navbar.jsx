@@ -24,7 +24,8 @@ const Navbar = () => {
         <DarkModeToggle />
         {links.map((link) => (
           <Link key={link.id} href={link.url}  className="">{link.title}</Link>
-        ))}
+        ))
+        }
         {
           session.status === "authenticated"? (
             <button onClick={signOut} className="p-2 border-none bg-[#53c28b] text-white cursor-pointer rounded-md">
@@ -35,8 +36,7 @@ const Navbar = () => {
               Login
             </Link>
           )
-        }
-        
+        }        
       </div>
     </div>
   )
