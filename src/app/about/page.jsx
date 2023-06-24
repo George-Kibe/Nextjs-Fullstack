@@ -5,7 +5,7 @@ import React from 'react'
 const About = () => {
   return (
     <div className=''>
-      <div className="relative w-[100%] h-[300px] md:h-[500px]">
+      <div className="relative w-[100%] h-[40vh] md:h-[60vh] lg:h[75vh]">
         <Image 
           src={'https://images.pexels.com/photos/14742225/pexels-photo-14742225.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load'}
           fill

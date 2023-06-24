@@ -6,9 +6,11 @@ async function handler(req,res){
     const {method} = req;
     await connect();
     if (method === "GET"){
+        const url = new URL(req.url);
+        const username = url.searchParams.get("username")
         try {
             await connect();
-            const posts = await Post.find();
+            const posts = await Post.find(username && {username});
             return new NextResponse(JSON.stringify(posts), {status:200})
         } catch (error) {
             return new NextResponse("Database Error", { status:500})
@@ -20,6 +22,7 @@ async function handler(req,res){
         const newPost = new Post({
             title, description, image, content, username
         })
+        console.log("New Post", newPost)
         try {
             await newPost.save();
             console.log("saved!")
