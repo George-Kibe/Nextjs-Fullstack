@@ -1,11 +1,10 @@
 "use client"
-import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const Register = () => {
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
   const router = useRouter()
 
   const handleSubmit = async(e) => {
@@ -13,15 +12,15 @@ const Register = () => {
     const name = e.target[0].value
     const email = e.target[1].value
     const password = e.target[2].value
+    const body = JSON.stringify({ name, email, password })
+    console.log("Body:",body)
     try {
       const response = await fetch("/api/auth/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name, email, password
-        })
+        body
       });
       response.status === 201 && router.push("/dashboard/login?success=Account has been successfully created")
     } catch (error) {

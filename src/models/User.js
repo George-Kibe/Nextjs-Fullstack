@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
     name: {
         type: String,
         unique: true,
@@ -20,4 +20,6 @@ const userSchema = new Schema({
 },{ timestamps: true}
 )
 
-export default mongoose.model("User", userSchema);
+const User = mongoose.models.user || mongoose.model('user', UserSchema);
+
+export default User

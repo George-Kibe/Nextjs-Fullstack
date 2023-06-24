@@ -7,7 +7,11 @@ import React, { useState } from 'react'
 const Login = () => {
   const [error, setError] = useState(false)
   const router = useRouter();
-  const session = useSession
+  const session = useSession();
+  
+  const goToRegister = () => {
+    router.push("/dashboard/register")
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,7 +37,10 @@ const Login = () => {
     </form>
     { error && <p className='text-red-500'>Error Loggin User! Try Again</p>}
     
-    <div>
+    <div className='flex flex-col gap-1'>
+      <button onClick={goToRegister} className=''>
+        Register
+      </button>
       <button onClick={() => signIn("google")} className="">Login With Google</button>
     </div>
   </div>
