@@ -1,4 +1,5 @@
 'use client'
+import moment from 'moment'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -50,23 +51,26 @@ const DashBoard = () => {
   }
   if (session.status === "authenticated") {
     return (
-      <div className="flex flex-col md:flex-row">
-        <div className="">
+      <div className="flex w-full flex-col md:flex-row">
+        <div className="w-full md:w-1/2 xl:w-1/3">
           {
             blogs?.map((blog, index) => (
-              <div className="flex flex-row gap-4 items-center" key={blog._id}>
-                <div className="w-40 h-40 md:w-40 md:h-40 relative rounded-2xl overflow-hidden">
+              <div className="flex flex-col sm:flex-row gap-2 items-center justify-around" key={blog._id}>
+                <div className="w-[50%] h-40 sm:h-50 relative ">
                   <Image src={blog.image} alt={blog.image+index} fill className='rounded-2xl object-contain' />
                 </div>
-                <h2 className="flex flex-wrap">{blog.title}</h2>
-                <span className="p-2 mr-2 rounded-full bg-red-500"
-                  onClick={() => handleDelete(blog._id)}
-                >X</span>
-              </div>
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="">
+                    <h2 className="flex text-sm md:text-md flex-wrap">{blog.title}</h2>
+                    <p className="my-1 text-xs text-[#53c28b]">Posted・{moment(blog.createdAt).calendar()}</p>
+                    <p className="">{blog.username}</p>
+                  </div>
+                  <span className="px-4 py-2 text-white mr-2 rounded-full bg-red-500"onClick={() => handleDelete(blog._id)}>X</span>
+                </div>                
+                </div>
             ))
           }
         </div>
-
         <form className="flex flex-col flex-1 gap-2 bg-transparent" onSubmit={handleSubmit}>
           <h1 className="font-bold text-2xl md:text-5xl m-2 md:m-4">Add a New Post</h1>
           <input type="text" className="p-1 self-start border-2 rounded-md bg-transparent" placeholder='Title' />

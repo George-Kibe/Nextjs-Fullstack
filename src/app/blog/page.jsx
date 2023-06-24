@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Button from '@/components/Button'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -32,6 +33,7 @@ const Blog = async() => {
             <p className="mb-2 md:mb-4">
               {blog.description}
             </p>
+            <p className="my-2 text-sm">Posted・{moment(blog.createdAt).calendar()}</p>
             <Button text="Read More" url={`/blog/${blog._id}`}/>
           </div>
         </div>
