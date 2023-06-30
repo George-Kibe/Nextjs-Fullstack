@@ -3,17 +3,14 @@ import Button from '@/components/Button'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import connect from '@/utils/db'
+import Post from '@/models/Post'
 
 async function getBlogsData() {
-  const res = await fetch("http://localhost:3000/api/posts") // { next: { revalidate:10}, revalidate after every 10 seconds
-    // cache: "no-store"}
-  if(!res.ok) {
-    throw new Error("Failed to fetch Data!")
-  }
-  const response = await res.json()
-  console.log("Response", response)
-  
-  return response;
+  await connect()
+  const response = await Post.find();
+  const blogsData = JSON.parse(JSON.stringify(response))
+  return blogsData
 }
 
 const Blog = async() => {

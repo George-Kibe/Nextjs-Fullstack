@@ -1,22 +1,28 @@
-import Button from '@/components/Button'
 import Image from 'next/image'
 import React from 'react'
 import {notFound} from "next/navigation";
 import moment from 'moment';
+import connect from '@/utils/db';
+import Post from '@/models/Post';
 
 async function getBlogData(id) {
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
-    // next: { revalidate:10}, revalidate after every 10 seconds
-    cache: "no-store"
-  })
-  if(!res.ok) {
-    return
-    // throw new Error("Failed to fetch Data!")
-  }
-  const response = await res.json()
-  console.log("Response", response)
+  await connect()
+
+  const response = await Post.findById(id);
+  const blogData = JSON.parse(JSON.stringify(response))
+  return blogData
+  // const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+  //   // next: { revalidate:10}, revalidate after every 10 seconds
+  //   cache: "no-store"
+  // })
+  // if(!res.ok) {
+  //   return
+  //   // throw new Error("Failed to fetch Data!")
+  // }
+  // const response = await res.json()
+  // console.log("Response", response)
   
-  return response;
+  // return response;
 }
 
 export async function generateMetadata({params}) {
@@ -29,9 +35,9 @@ export async function generateMetadata({params}) {
 
 
 const BlogPage = async({params}) => {
-  console.log(params)
+  // console.log(params)
   const blog = await getBlogData(params.id)
-  console.log("Blog from single Blog Page: ", blog)
+  // console.log("Blog from single Blog Page: ", blog)
   if(!blog){
     return(
       <p className="">404 Not Found</p>
