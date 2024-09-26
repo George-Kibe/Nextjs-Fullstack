@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -13,24 +11,23 @@ pnpm dev
 # or
 bun dev
 ```
+## Prisma Configuration
+To initialize prisma
+```npx prisma init```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create models in the created file ```schema.prisma```
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+1. Setup a postgres database using docker 
+2. Set environment variable for the postgres url
+3. Run Migrations ```npx prisma migrate dev --name initial migration```
+4. Optionally, you view the prisma studio ```npx prisma studio```
+5. Optionally, you can seed the database with dummy data ```npx prisma migrate reset```  or ```npx prisma db seed```.  PS: Must add seed data in the seed.ts file
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Prisma documentation for Postgres
+Checkout [Prisma documentation with Postgres](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgresql) for more details.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Resetting the database
+```npx prisma db push --force-reset```
