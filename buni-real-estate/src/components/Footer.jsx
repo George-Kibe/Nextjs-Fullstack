@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -13,12 +14,14 @@ const Footer = () => {
             <div className="mb-10 w-full">
               <Link
                 href="/"
-                className="mb-6 inline-block max-w-[160px]"
+                className="inline-block max-w-[160px]"
               >
-                <img
-                  src="/properties/p4.jpeg"
+                <Image
+                  src="/buni-logo.png"
                   alt="logo"
-                  className="max-w-full w-[50px]"
+                  width={200}
+                  height={200}
+                  className=" "
                 />
               </Link>
               <p className="mb-8 max-w-[270px] text-base text-gray-7">
