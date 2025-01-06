@@ -11,11 +11,12 @@ const PropertyCard = ({ property }) => {
   const isFavorite = false;
 
   const addToFavorite = () => {
-    if (isFavorite) {
-      setFavoriteProperties(favoriteProperties.filter(p => p.id !== property.id));
-    } else {
-      setFavoriteProperties([...favoriteProperties, property]);
-    }
+    console.log("Add to favorite");
+    // if (isFavorite) {
+    //   setFavoriteProperties(favoriteProperties.filter(p => p.id !== property.id));
+    // } else {
+    //   setFavoriteProperties([...favoriteProperties, property]);
+    // }
   }
 
   return (
