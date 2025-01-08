@@ -3,11 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-const page = ({ params, searchParams }: { params: { courseId: string }; searchParams: { session_id: string } }) => {
-	const { courseId } = params;
-	const { session_id } = searchParams;
+const SuccessPage = async (
+    props: { params: Promise<{ courseId: string }>; searchParams: Promise<{ session_id: string }> }
+) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+    const { courseId } = params;
+    const { session_id } = searchParams;
 
-	return (
+    return (
 		<div className='container mx-auto py-12 px-4'>
 			<Card className='max-w-2xl mx-auto'>
 				<CardHeader className='text-center'>
@@ -38,4 +42,4 @@ const page = ({ params, searchParams }: { params: { courseId: string }; searchPa
 		</div>
 	);
 };
-export default page;
+export default SuccessPage;

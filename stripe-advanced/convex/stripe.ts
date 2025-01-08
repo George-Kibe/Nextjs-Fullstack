@@ -94,7 +94,6 @@ export const createProPlanCheckoutSession = action({
 		} else if (args.planId === "year") {
 			priceId = process.env.STRIPE_YEARLY_PRICE_ID;
 		}
-
 		if (!priceId) {
 			throw new ConvexError("PriceId not provided");
 		}

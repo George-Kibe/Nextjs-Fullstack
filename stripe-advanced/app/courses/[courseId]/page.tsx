@@ -1,4 +1,5 @@
-"use client";
+"use client";;
+import { use } from "react";
 
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
@@ -12,14 +13,15 @@ import { Button } from "@/components/ui/button";
 import { Download, FileText, FileTextIcon, Lock, PlayCircle } from "lucide-react";
 import PurchaseButton from "@/components/PurchaseButton";
 
-const CourseDetailPage = ({ params }: { params: { courseId: Id<"courses"> } }) => {
-	const { user, isLoaded: isUserLoaded } = useUser();
-	const userData = useQuery(api.users.getUserByClerkId, { clerkId: user?.id ?? "" });
-	console.log("UserData: ", userData)
-	const { courseId } = params;
-	const courseData = useQuery(api.courses.getCourseById, { courseId});
+const CourseDetailPage = (props: { params: Promise<{ courseId: Id<"courses"> }> }) => {
+    const params = use(props.params);
+    const { user, isLoaded: isUserLoaded } = useUser();
+    const userData = useQuery(api.users.getUserByClerkId, { clerkId: user?.id ?? "" });
+    console.log("UserData: ", userData)
+    const { courseId } = params;
+    const courseData = useQuery(api.courses.getCourseById, { courseId});
 
-	const userAccess = useQuery(
+    const userAccess = useQuery(
 		api.users.getUserAccess,
 		userData
 			? {
@@ -29,15 +31,15 @@ const CourseDetailPage = ({ params }: { params: { courseId: Id<"courses"> } }) =
 			: "skip"
 	) || { hasAccess: false };
 
-	// undefined => loading, convex
+    // undefined => loading, convex
 
-	if (!isUserLoaded || courseData === undefined) {
+    if (!isUserLoaded || courseData === undefined) {
 		return <CourseDetailSkeleton />;
 	}
 
-	if (courseData === null) return notFound();
+    if (courseData === null) return notFound();
 
-	return (
+    return (
 		<div className='container mx-auto py-8 px-4'>
 			<Card className='max-w-4xl mx-auto'>
 				<CardHeader>
