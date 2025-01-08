@@ -11,7 +11,7 @@ import PurchaseButton from "@/components/PurchaseButton";
 const page = async () => {
 	const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 	const courses = await convex.query(api.courses.getCourses);
-
+	
 	return (
 		<div className='container mx-auto py-8 px-4'>
 			<h1 className='text-3xl font-bold mb-8'>All Courses</h1>
