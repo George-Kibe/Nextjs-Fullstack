@@ -4,6 +4,8 @@ import { Webhook } from "svix";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { api } from "./_generated/api";
 import stripe from "../lib/stripe";
+import resend from "../lib/resend";
+import WelcomeEmail from "../emails/WelcomeEmail";
 
 const http = httpRouter();
 
@@ -61,7 +63,16 @@ const clerkWebhook  = httpAction( async (ctx, request) => {
         stripeCustomerId: customer.id
       });
       
-      // TODO Send a Welcome Email to a nely signed up Client
+      // Send a Welcome Email to a nely signed up Client
+      if (process.env.NODE_ENV === "development") {
+        // For production, use your own email and domain. Configure in resend dashboard
+				await resend.emails.send({
+					from: "MasterClass <onboarding@resend.dev>",
+					to: email,
+					subject: "Welcome to MasterClass!",
+					react: WelcomeEmail({ name, url: process.env.NEXT_PUBLIC_APP_URL! }),
+				});
+			}
       
     } catch (error) {
       console.error("Error creating user:", error);
